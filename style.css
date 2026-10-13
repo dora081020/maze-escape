@@ -1,0 +1,491 @@
+/* ============================================================
+   🌌 Antigravity Cosmic Maze Escape - Style
+   코스믹 사이버펑크 테마 & 반응형 UI
+   ============================================================ */
+
+:root {
+  --bg-space: #070913;
+  --bg-card: rgba(18, 24, 48, 0.75);
+  --bg-card-border: rgba(0, 240, 255, 0.2);
+  --accent-cyan: #00f0ff;
+  --accent-purple: #b026ff;
+  --accent-gold: #ffd700;
+  --accent-green: #00ff88;
+  --text-main: #f0f4ff;
+  --text-muted: #8d9bb5;
+  --wall-color: #17203d;
+  --wall-border: #283a6d;
+  --path-color: #0c1021;
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --shadow-glow: 0 0 20px rgba(0, 240, 255, 0.35);
+  --font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+  --font-display: 'Orbitron', monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--bg-space);
+  background-image: 
+    radial-gradient(circle at 15% 15%, rgba(176, 38, 255, 0.12) 0%, transparent 40%),
+    radial-gradient(circle at 85% 85%, rgba(0, 240, 255, 0.12) 0%, transparent 40%),
+    radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 32px 32px;
+  color: var(--text-main);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+  overflow-x: hidden;
+}
+
+.app-container {
+  width: 100%;
+  max-width: 780px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* --- Header --- */
+.header {
+  text-align: center;
+  padding: 6px 0;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.logo .icon {
+  font-size: 1.8rem;
+  animation: floatIcon 3s ease-in-out infinite;
+}
+
+@keyframes floatIcon {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-6px) rotate(6deg); }
+}
+
+.logo h1 {
+  font-family: var(--font-family);
+  font-weight: 800;
+  font-size: 1.85rem;
+  letter-spacing: -0.5px;
+  color: #fff;
+  text-shadow: 0 0 16px rgba(0, 240, 255, 0.6);
+}
+
+.logo h1 .accent {
+  color: var(--accent-cyan);
+  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  margin-top: 4px;
+}
+
+/* --- Controls Panel --- */
+.control-panel {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--bg-card-border);
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+}
+
+.controls-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.controls-group label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+select {
+  background: #0d1326;
+  border: 1px solid rgba(0, 240, 255, 0.3);
+  color: var(--text-main);
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+select:hover, select:focus {
+  border-color: var(--accent-cyan);
+  box-shadow: 0 0 8px rgba(0, 240, 255, 0.4);
+}
+
+.toggle-btn {
+  background: #0d1326;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--text-main);
+  padding: 8px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.toggle-btn:hover {
+  background: rgba(0, 240, 255, 0.1);
+  border-color: var(--accent-cyan);
+}
+
+.toggle-btn.active {
+  background: rgba(0, 240, 255, 0.18);
+  border-color: var(--accent-cyan);
+  box-shadow: 0 0 12px rgba(0, 240, 255, 0.3);
+  color: var(--accent-cyan);
+}
+
+.buttons-group {
+  display: flex;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.action-btn {
+  padding: 8px 16px;
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+  font-size: 0.88rem;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.action-btn.primary {
+  background: linear-gradient(135deg, var(--accent-cyan), #0077ff);
+  color: #030818;
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
+}
+
+.action-btn.primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 22px rgba(0, 240, 255, 0.7);
+}
+
+.action-btn.secondary {
+  background: rgba(176, 38, 255, 0.15);
+  border: 1px solid rgba(176, 38, 255, 0.4);
+  color: #e5adff;
+}
+
+.action-btn.secondary:hover {
+  background: rgba(176, 38, 255, 0.3);
+  border-color: var(--accent-purple);
+  box-shadow: 0 0 14px rgba(176, 38, 255, 0.5);
+}
+
+.action-btn:active {
+  transform: translateY(1px);
+}
+
+/* --- Status Bar --- */
+.status-bar {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.stat-box {
+  background: var(--bg-card);
+  border: 1px solid var(--bg-card-border);
+  backdrop-filter: blur(10px);
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.stat-value {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 1px;
+}
+
+#stepText {
+  color: var(--accent-cyan);
+}
+
+#bestRecordText {
+  color: var(--accent-gold);
+}
+
+/* --- Game Viewport & Canvas --- */
+.game-viewport {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  max-height: 580px;
+  background: #090d1f;
+  border-radius: var(--radius-lg);
+  border: 2px solid rgba(0, 240, 255, 0.3);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7), var(--shadow-glow);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#mazeCanvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+/* --- Mobile D-Pad Controls --- */
+.touch-controls {
+  display: flex;
+  justify-content: center;
+  padding: 4px 0;
+}
+
+.dpad {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.dpad-middle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dpad-center {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  opacity: 0.5;
+}
+
+.dpad-btn {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-sm);
+  background: rgba(23, 32, 61, 0.85);
+  border: 1px solid rgba(0, 240, 255, 0.3);
+  color: var(--accent-cyan);
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+  touch-action: manipulation;
+  transition: all 0.1s ease;
+}
+
+.dpad-btn:active {
+  background: rgba(0, 240, 255, 0.35);
+  transform: scale(0.92);
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.7);
+}
+
+/* --- Footer Guide --- */
+.footer-guide {
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  background: rgba(18, 24, 48, 0.4);
+  padding: 10px;
+  border-radius: var(--radius-sm);
+}
+
+.footer-guide strong {
+  color: #fff;
+}
+
+/* --- Modal Overlay --- */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(4, 7, 18, 0.85);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.modal-overlay.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.modal-card {
+  background: linear-gradient(145deg, #10162e, #0c1024);
+  border: 1px solid rgba(0, 240, 255, 0.4);
+  border-radius: var(--radius-lg);
+  padding: 32px 28px;
+  width: 90%;
+  max-width: 420px;
+  text-align: center;
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(0, 240, 255, 0.4);
+  transform: scale(1);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.modal-overlay.hidden .modal-card {
+  transform: scale(0.85);
+}
+
+.modal-icon {
+  font-size: 3rem;
+  margin-bottom: 12px;
+  animation: bounce 1.2s infinite alternate;
+}
+
+@keyframes bounce {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-10px); }
+}
+
+.modal-card h2 {
+  font-family: var(--font-family);
+  font-weight: 800;
+  font-size: 1.55rem;
+  letter-spacing: -0.5px;
+  color: #fff;
+  margin-bottom: 6px;
+  background: linear-gradient(135deg, #fff, var(--accent-cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.modal-desc {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-bottom: 22px;
+}
+
+.modal-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  background: rgba(7, 11, 26, 0.6);
+  padding: 14px 10px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.modal-stat-item span {
+  display: block;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+.modal-stat-item strong {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  color: var(--accent-cyan);
+}
+
+.action-btn.large {
+  width: 100%;
+  padding: 12px 20px;
+  font-size: 1rem;
+  justify-content: center;
+}
+
+/* --- Responsive Media Queries --- */
+@media (max-width: 600px) {
+  body {
+    padding: 10px 8px;
+  }
+  
+  .control-panel {
+    gap: 8px;
+    padding: 10px;
+  }
+
+  .buttons-group {
+    width: 100%;
+    margin-left: 0;
+    justify-content: space-between;
+  }
+
+  .buttons-group .action-btn {
+    flex: 1;
+    justify-content: center;
+  }
+
+  .logo h1 {
+    font-size: 1.5rem;
+  }
+
+  .footer-guide {
+    display: none; /* 모바일에서는 깔끔하게 숨김 */
+  }
+}
+
+@media (min-width: 769px) {
+  /* PC에서는 모바일 D-Pad 컨트롤러 숨기기 (키보드 중심) */
+  .touch-controls {
+    display: none;
+  }
+}

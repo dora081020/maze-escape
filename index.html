@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>🚀 안티그래비티 코스믹 미로탈출 (Zero-G Maze)</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600;800&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="app-container">
+    <!-- 헤더 영역 -->
+    <header class="header">
+      <div class="logo">
+        <span class="icon">🌌</span>
+        <h1>안티그래비티 <span class="accent">미로탈출</span></h1>
+      </div>
+      <p class="subtitle">무중력 우주 미로 탈출 웹앱 | 학생 프로젝트용</p>
+    </header>
+
+    <!-- 게임 컨트롤 패널 -->
+    <section class="control-panel">
+      <div class="controls-group">
+        <label for="difficultySelect">난이도 선택</label>
+        <select id="difficultySelect">
+          <option value="15">쉬움 (15 x 15)</option>
+          <option value="23" selected>보통 (23 x 23)</option>
+          <option value="31">어려움 (31 x 31)</option>
+          <option value="41">전문가 (41 x 41)</option>
+        </select>
+      </div>
+
+      <div class="controls-group">
+        <label for="modeToggle">이동 방식</label>
+        <button id="modeToggle" class="toggle-btn" title="이동 모드 변경">
+          <span id="modeIcon">🛸</span> <span id="modeText">반중력 미끄러짐</span>
+        </button>
+      </div>
+
+      <div class="controls-group">
+        <label for="fogToggle">시야 모드</label>
+        <button id="fogToggle" class="toggle-btn" title="탐험등 켜기/끄기">
+          <span id="fogIcon">💡</span> <span id="fogText">전체 시야</span>
+        </button>
+      </div>
+
+      <div class="controls-group">
+        <label for="soundToggle">효과음</label>
+        <button id="soundToggle" class="toggle-btn active" title="소리 켜기/끄기">
+          <span id="soundIcon">🔊</span>
+        </button>
+      </div>
+
+      <div class="buttons-group">
+        <button id="hintBtn" class="action-btn secondary" title="최단 탈출 경로 표시">🧭 힌트 보기</button>
+        <button id="resetBtn" class="action-btn primary" title="새로운 미로 생성">🔄 새 미로</button>
+      </div>
+    </section>
+
+    <!-- 상태 정보 바 -->
+    <section class="status-bar">
+      <div class="stat-box">
+        <span class="stat-label">⏱️ 경과 시간</span>
+        <span id="timerText" class="stat-value">00:00</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-label">👣 이동 횟수</span>
+        <span id="stepText" class="stat-value">0</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-label">🏆 최고 기록</span>
+        <span id="bestRecordText" class="stat-value">-</span>
+      </div>
+    </section>
+
+    <!-- 캔버스 게임 영역 -->
+    <main class="game-viewport">
+      <canvas id="mazeCanvas"></canvas>
+    </main>
+
+    <!-- 모바일 / 터치용 방향키 컨트롤러 -->
+    <section class="touch-controls">
+      <div class="dpad">
+        <button id="btnUp" class="dpad-btn up" aria-label="위로 이동">▲</button>
+        <div class="dpad-middle">
+          <button id="btnLeft" class="dpad-btn left" aria-label="왼쪽으로 이동">◀</button>
+          <div class="dpad-center">🎮</div>
+          <button id="btnRight" class="dpad-btn right" aria-label="오른쪽으로 이동">▶</button>
+        </div>
+        <button id="btnDown" class="dpad-btn down" aria-label="아래로 이동">▼</button>
+      </div>
+    </section>
+
+    <!-- 가이드 안내 -->
+    <footer class="footer-guide">
+      <p>⌨️ <strong>키보드 조작:</strong> 방향키 [↑][↓][←][→] 또는 [W][A][S][D] / [R] 재시작 / [H] 힌트 / [M] 모드 전환</p>
+      <p>💡 <strong>반중력 모드:</strong> 우주의 무중력 상태처럼 벽에 부딪힐 때까지 멈추지 않고 미끄러집니다!</p>
+    </footer>
+  </div>
+
+  <!-- 승리 축하 모달 -->
+  <div id="winModal" class="modal-overlay hidden">
+    <div class="modal-card">
+      <div class="modal-icon">🎉</div>
+      <h2>미로 탈출 성공!</h2>
+      <p class="modal-desc">우주 차원문을 성공적으로 통과했습니다!</p>
+      
+      <div class="modal-stats">
+        <div class="modal-stat-item">
+          <span>최종 시간</span>
+          <strong id="finalTime">00:00</strong>
+        </div>
+        <div class="modal-stat-item">
+          <span>총 걸음 수</span>
+          <strong id="finalSteps">0</strong>
+        </div>
+        <div class="modal-stat-item">
+          <span>플레이 모드</span>
+          <strong id="finalMode">반중력 미끄러짐</strong>
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button id="modalNextBtn" class="action-btn primary large">다음 미로 도전 🚀</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
